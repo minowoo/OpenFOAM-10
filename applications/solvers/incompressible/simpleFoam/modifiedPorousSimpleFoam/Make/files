@@ -1,0 +1,3 @@
+modifiedPorousSimpleFoam.C
+
+EXE = $(FOAM_APPBIN)/modifiedPorousSimpleFoam
