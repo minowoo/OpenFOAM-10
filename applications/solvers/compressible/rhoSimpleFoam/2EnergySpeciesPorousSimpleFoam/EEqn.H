@@ -11,7 +11,7 @@
 	    hSource[celli] = hSource[celli]*mesh.V()[celli];
 	} else
 	{
-	    hSource[celli] = 0.0;
+	    hSource[celli] = hSource[celli]*mesh.V()[celli]*0.0;
 	}
     }
 

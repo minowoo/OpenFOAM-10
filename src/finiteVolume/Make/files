@@ -488,6 +488,7 @@ $(porosity)/porosityModel/porosityModelNew.C
 $(porosity)/porosityModel/porosityModelList.C
 $(porosity)/porosityModel/IOporosityModelList.C
 $(porosity)/DarcyForchheimer/DarcyForchheimer.C
+$(porosity)/DarcyForchheimer2/DarcyForchheimer2.C
 $(porosity)/fixedCoeff/fixedCoeff.C
 $(porosity)/powerLaw/powerLaw.C
 $(porosity)/solidification/solidification.C
