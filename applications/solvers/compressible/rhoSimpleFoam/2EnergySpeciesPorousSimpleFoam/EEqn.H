@@ -8,10 +8,11 @@
     {
 	if(gamma[celli]<1.0)
 	{	
-	    hSource[celli] = hSource[celli]*mesh.V()[celli];
+	    hSource[celli] = hSource[celli]; //*mesh.V()[celli];
+//	    Info<<h_int[celli]<<","<<gamma[celli]<<","<<hSource[celli]<<","<<mesh.V()[celli]<<","<<thermo.T()[celli]<<","<<ts[celli]<<endl;
 	} else
 	{
-	    hSource[celli] = hSource[celli]*mesh.V()[celli]*0.0;
+	    hSource[celli] = hSource[celli]*0.0; //mesh.V()[celli]*0.0;
 	}
     }
 

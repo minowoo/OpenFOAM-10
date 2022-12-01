@@ -142,7 +142,24 @@ dimensionedScalar initialMass = fvc::domainIntegrate(rho);
 #include "createFvModels.H"
 #include "createFvConstraints.H"
 
-const dimensionedScalar Nu ("Nu", dimensionSet(0,0,0,0,0,0,0), 5); // Nusselt number
-const dimensionedScalar Dh ("Dh", dimensionSet(0,1,0,0,0,0,0), 2e-3); // Hydraulic diameter of channel, m
+Info<< "Reading transportProperties" << endl;
+IOdictionary transportProperties
+(
+	IOobject
+	(
+              "transportProperties",
+              runTime.constant(),
+    	      mesh,
+              IOobject::MUST_READ,
+              IOobject::NO_WRITE
+	)
+);
+
+// const dimensionedScalar Nu ("Nu", dimensionSet(0,0,0,0,0,0,0), 5); // Nusselt number
+const dimensionedScalar Nu (transportProperties.lookup("Nu")); // Nusselt number
+//const dimensionedScalar Dh ("Dh", dimensionSet(0,1,0,0,0,0,0), 2e-3); // Hydraulic diameter of channel, m
+const dimensionedScalar Dh (transportProperties.lookup("Dh")); // Hydraulic diameter of channel, m
+//const dimensionedScalar specificSurfaceArea
+//("specificSurfaceArea", dimensionSet(0,-1,0,0,0,0,0), 2000); // specific surfac area, m-1
 const dimensionedScalar specificSurfaceArea
-("specificSurfaceArea", dimensionSet(0,-1,0,0,0,0,0), 1000); // specific surfac area, m-1
+(transportProperties.lookup("specificSurfaceArea")); // specific surfac area, m-1
