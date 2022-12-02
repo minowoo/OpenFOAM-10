@@ -23,7 +23,7 @@
        fvm::div(phi,YG)
     ==
        fvm::laplacian(gamma*rho*Dmix,YG)
-       + ygSource
+       - ygSource
     );
     YGEqn.relax();
     YGEqn.solve();
@@ -36,7 +36,7 @@
     reactionRate = reactionRate*30/1000 * 0.0001;  //unit mol/m2-s to kg/m2-s
     reactionRate.dimensions().reset(dimensionSet(1,-2,-1,0,0,0,0));
 
-    YS = ((1-gamma)*reactionRate + rho*km*YG)/(rho*km); 
+    YS = (-(1-gamma)*reactionRate + rho*km*YG)/(rho*km); 
     fvConstraints.constrain(YS); 
     YS.max(0.0);
 }
