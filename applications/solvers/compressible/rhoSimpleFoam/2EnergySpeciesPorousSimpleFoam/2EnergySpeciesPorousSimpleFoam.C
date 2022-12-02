@@ -71,7 +71,7 @@ int main(int argc, char *argv[])
             #include "UEqn.H"
             #include "EEqn.H"
             #include "tsEqn.H"
-    //        #include "YEqn.H"
+            #include "YEqn.H"
             #include "pEqn.H"
         }
 
@@ -83,8 +83,16 @@ int main(int argc, char *argv[])
         Info<< "ExecutionTime = " << runTime.elapsedCpuTime() << " s"
             << "  ClockTime = " << runTime.elapsedClockTime() << " s"
             << nl << endl;
+/*  
+  	volScalarField dimLessTs = ts;
+        dimLessTs.dimensions().reset(dimensionSet(0,0,0,0,0,0,0));
+        volScalarField reactionRate = 1.e4 * Foam::exp(-40000./8.314/dimLessTs);
+        reactionRate = reactionRate*30/1000 * 0.0; //unit mol/m2-s to kg/m2-s
+        reactionRate.dimensions().reset(dimensionSet(1,-2,-1,0,0,0,0));
+
+        YS = YG; //((1-gamma)*reactionRate + rho*km*YG)/(rho*km);
+*/
     }
-    //ts = pos(gamma-1)*thermo.T() + neg(gamma-1)*ts;
     runTime.write();
 
     Info<< "End\n" << endl;

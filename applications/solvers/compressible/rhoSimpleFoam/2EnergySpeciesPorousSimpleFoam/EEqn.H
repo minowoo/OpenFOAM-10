@@ -2,7 +2,7 @@
     volScalarField& he = thermo.he();
     volScalarField kappa = thermo.kappa();
     volScalarField h_int = Nu*kappa/Dh;
-    volScalarField hSource = specificSurfaceArea/gamma*h_int*(thermo.T()-ts);
+    volScalarField hSource = specificSurfaceArea*h_int*(thermo.T()-ts);
 
     forAll(hSource, celli)
     {
@@ -24,7 +24,7 @@
           ? fvc::div(phi, volScalarField("Ekp", 0.5*magSqr(U) + p/rho))
           : fvc::div(phi, volScalarField("K", 0.5*magSqr(U)))
         )
-      + thermophysicalTransport->divq(he)
+      + gamma * thermophysicalTransport->divq(he)
       + hSource
      ==
         fvModels.source(rho, he)

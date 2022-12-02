@@ -79,12 +79,12 @@ volScalarField YG
     mesh
 );
 
-Info<< "Reading field S\n" << endl;
-volScalarField S
+Info<< "Reading field YS\n" << endl;
+volScalarField YS
 (
     IOobject
     (
-        "S",
+        "YS",
         runTime.timeName(),
         mesh,
         IOobject::MUST_READ,
