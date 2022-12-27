@@ -42,7 +42,7 @@
     {
 	if(gamma[celli]<1.0)
 	{
-            tsSource[celli] = tsSource[celli]/(1.0-gamma[celli]); //*mesh.V()[celli];
+            tsSource[celli] = tsSource[celli]; // /(1.0-gamma[celli]); //*mesh.V()[celli];
 	} else
 	{
 	    tsSource[celli] = tsSource[celli]*0.0; //mesh.V()[celli]*0.0;

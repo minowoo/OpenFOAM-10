@@ -32,15 +32,27 @@
 
     volScalarField dimLessTs = ts;
     dimLessTs.dimensions().reset(dimensionSet(0,0,0,0,0,0,0));
-//    volScalarField reactionRate = 1.e4 * Foam::exp(-40000./8.314/dimLessTs);
-//    reactionRate = reactionRate*30/1000 * 0.0001;  //unit mol/m2-s to kg/m2-s
+    volScalarField reactionRate = 1.e4 * Foam::exp(-50000./8.314/dimLessTs);
+    reactionRate = reactionRate*30/1000 * 0.1;  //unit mol/m2-s to kg/m2-s
 
-    volScalarField reactionRate = 4.6159e-8 * Foam::exp(1.3686e-2*dimLessTs);
+//    volScalarField reactionRate = 4.6159e-8 * Foam::exp(1.3686e-2*dimLessTs)*0.5;
     reactionRate.dimensions().reset(dimensionSet(1,-2,-1,0,0,0,0));
 
+
+    forAll(reactionRate, celli)
+    {
+        if(gamma[celli]<1.0)
+    	{
+	    reactionRate[celli] = reactionRate[celli];
+    	} else
+    	{
+	    reactionRate[celli] = reactionRate[celli]*0.0;	
+	}
+    }		    
     //Info<<reactionRate<<endl;
 
-    YS = (-(1-gamma)*reactionRate + rho*km*YG)/(rho*km); 
+    //YS = (-(1-gamma)*reactionRate + rho*km*YG)/(rho*km); 
+    YS = (-reactionRate + rho*km*YG)/(rho*km); 
     fvConstraints.constrain(YS); 
     YS.max(0.0);
 }
